@@ -48,4 +48,19 @@ dbutils.fs.mount(
 
 # COMMAND ----------
 
+tenant = dbutils.secrets.get(scope="xxairlilnes-key-vault", key="xxairlines-tenant")
+
+configs = {"fs.azure.account.auth.type": "OAuth",
+           "fs.azure.account.oauth.provider.type": "org.apache.hadoop.fs.azurebfs.oauth2.ClientCredsTokenProvider",
+           "fs.azure.account.oauth2.client.id": dbutils.secrets.get(scope="xxairlilnes-key-vault", key="xxairlines-client-id"),
+           "fs.azure.account.oauth2.client.secret": dbutils.secrets.get(scope="xxairlilnes-key-vault", key="xxairlines-secret-value"),
+           "fs.azure.account.oauth2.client.endpoint": "https://login.microsoftonline.com/{tenant}/oauth2/token"}
+
+dbutils.fs.mount(
+  source = "abfss://raw@xxairlines.dfs.core.windows.net/flights",
+  mount_point = "/mnt/xxairlinesprod",
+  extra_configs = configs)
+
+# COMMAND ----------
+
 # MAGIC %fs ls mnt/raw/
