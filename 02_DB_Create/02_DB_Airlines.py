@@ -33,9 +33,9 @@ df.write.parquet("dbfs:/mnt/xxairlinesprod/airlines", mode="overwrite")
 # MAGIC %scala
 # MAGIC val jdbcUsername = dbutils.secrets.get(scope="key-valut-student", key="db_username")
 # MAGIC val jdbcPassword = dbutils.secrets.get(scope="key-valut-student", key="db_password")
-# MAGIC val jdbcHostname = "improj.database.windows.net"
+# MAGIC val jdbcHostname = dbutils.secrets.get(scope="key-valut-student", key="db_HostName")
 # MAGIC val jdbcPort = 1433
-# MAGIC val jdbcDatabase ="IM_Proj"
+# MAGIC val jdbcDatabase = dbutils.secrets.get(scope="key-valut-student", key="db_Name")
 # MAGIC
 # MAGIC import java.util.Properties
 # MAGIC
@@ -46,5 +46,5 @@ df.write.parquet("dbfs:/mnt/xxairlinesprod/airlines", mode="overwrite")
 # MAGIC connectionProperties.put("password", s"${jdbcPassword}")
 # MAGIC
 # MAGIC
-# MAGIC spark.sql("create or replace table Airline_hive as select * from Airlines")
-# MAGIC spark.table("Airline_hive").write.mode("overwrite").jdbc(jdbc_url, "Airlines", connectionProperties)
+# MAGIC spark.sql("create or replace table Airport_hive as select * from Airports")
+# MAGIC spark.table("Airport_hive").write.mode("overwrite").jdbc(jdbc_url, "Airports", connectionProperties)

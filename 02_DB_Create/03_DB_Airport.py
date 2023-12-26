@@ -38,9 +38,9 @@ df.write.parquet("dbfs:/mnt/xxairlinesprod/airports", mode="overwrite")
 # MAGIC %scala
 # MAGIC val jdbcUsername = dbutils.secrets.get(scope="key-valut-student", key="db_username")
 # MAGIC val jdbcPassword = dbutils.secrets.get(scope="key-valut-student", key="db_password")
-# MAGIC val jdbcHostname = "improj.database.windows.net"
+# MAGIC val jdbcHostname = dbutils.secrets.get(scope="key-valut-student", key="db_HostName")
 # MAGIC val jdbcPort = 1433
-# MAGIC val jdbcDatabase ="IM_Proj"
+# MAGIC val jdbcDatabase = dbutils.secrets.get(scope="key-valut-student", key="db_Name")
 # MAGIC
 # MAGIC import java.util.Properties
 # MAGIC
