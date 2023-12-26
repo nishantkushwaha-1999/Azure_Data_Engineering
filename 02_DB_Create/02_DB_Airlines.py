@@ -31,10 +31,8 @@ df.write.parquet("dbfs:/mnt/xxairlinesprod/airlines", mode="overwrite")
 # COMMAND ----------
 
 # MAGIC %scala
-# MAGIC // val jdbcUsername = dbutils.secrets.get(scope="key-valut-student", key="db_username")
-# MAGIC // val jdbcPassword = dbutils.secrets.get(scope="key-valut-student", key="db_password")
-# MAGIC val jdbcUsername = "personal"
-# MAGIC val jdbcPassword = "AzeaBotanica@226029"
+# MAGIC val jdbcUsername = dbutils.secrets.get(scope="key-valut-student", key="db_username")
+# MAGIC val jdbcPassword = dbutils.secrets.get(scope="key-valut-student", key="db_password")
 # MAGIC val jdbcHostname = "improj.database.windows.net"
 # MAGIC val jdbcPort = 1433
 # MAGIC val jdbcDatabase ="IM_Proj"
